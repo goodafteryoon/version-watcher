@@ -8,7 +8,7 @@ load_dotenv()
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 # 크롬 웹스토어 URL
-URL = "https://chromewebstore.google.com/detail/sentencify-multi-languag/cfleejimcegnnhoaffboddkajhenehp"
+URL = os.getenv("URL")
 
 # 버전 기록 파일
 VERSION_FILE = "last_version.txt"
