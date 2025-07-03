@@ -13,20 +13,31 @@ URL = "https://chromewebstore.google.com/detail/sentencify-multi-languag/cfleeji
 # 버전 기록 파일
 VERSION_FILE = "last_version.txt"
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
 
 def fetch_version():
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; VersionChecker/1.0)"
-    }
-    res = requests.get(URL, headers=headers)
-    soup = BeautifulSoup(res.text, "html.parser")
+    options = Options()
+    options.add_argument("--headless")  # 브라우저 UI 없이 실행
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    # 버전 정보 추출
-    version_tag = soup.find("div", string="버전")
-    if not version_tag:
+    driver = webdriver.Chrome(options=options)
+
+    driver.get(URL)
+
+    time.sleep(3)  # 페이지 로딩 대기 (크롬 웹스토어는 JS 렌더링이 필요)
+
+    # 버전 요소 찾기
+    elements = driver.find_elements(By.XPATH, '//div[contains(text(), "버전")]/following-sibling::div')
+    if not elements:
+        driver.quit()
         raise Exception("버전 정보를 찾을 수 없습니다.")
 
-    version_value = version_tag.find_next_sibling("div").text.strip()
+    version_value = elements[0].text.strip()
+    driver.quit()
     return version_value
 
 

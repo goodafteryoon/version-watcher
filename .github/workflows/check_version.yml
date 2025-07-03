@@ -2,8 +2,8 @@ name: Check Chrome Extension Version
 
 on:
   schedule:
-    - cron: '0 3 * * *' # 매일 오전 3시 UTC 실행
-  workflow_dispatch: # 수동 실행도 가능
+    - cron: '*/5 * * * *' # 5분마다 실행
+  workflow_dispatch:
 
 jobs:
   check:
@@ -20,6 +20,16 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Install ChromeDriver
+        run: |
+          sudo apt-get install -y chromium-chromedriver
+          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
       - name: Run version checker
         env:
