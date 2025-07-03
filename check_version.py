@@ -26,10 +26,11 @@ def fetch_version():
 
     driver.get(URL)
 
-    time.sleep(5)
+    time.sleep(10)  # 로딩 대기
 
-    elements = driver.find_elements(By.XPATH, '//div[contains(text(), "버전")]/following-sibling::div')
+    elements = driver.find_elements(By.XPATH, '//div[contains(text(),"버전") or contains(text(),"Version")]/following-sibling::div')
     if not elements:
+        print(driver.page_source)  # 디버그용 출력
         driver.quit()
         raise Exception("버전 정보를 찾을 수 없습니다.")
 
