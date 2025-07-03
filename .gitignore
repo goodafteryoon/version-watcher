@@ -1,0 +1,25 @@
+# 가상환경 폴더
+venv/
+
+# 파이썬 캐시 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 환경 변수 파일
+.env
+
+# 버전 기록 파일
+last_version.txt
+
+# IDE 설정 파일
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# 로그파일
+*.log
