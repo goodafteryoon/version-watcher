@@ -36,4 +36,5 @@ jobs:
       - name: Run version checker
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          URL: ${{ secrets.URL }}
         run: python check_version.py
