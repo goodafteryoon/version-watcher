@@ -38,3 +38,8 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           URL: ${{ secrets.URL }}
         run: python check_version.py
+
+      - name: Debug print URL
+        env:
+          URL: ${{ secrets.URL }}
+        run: echo "URL is $URL"
