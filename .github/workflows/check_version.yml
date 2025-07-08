@@ -47,6 +47,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           URL: ${{ secrets.URL }}
+          WHALE_URL: ${{ secrets.WHALE_URL }}
         run: python check_version.py
 
       - name: Save last_version.txt
